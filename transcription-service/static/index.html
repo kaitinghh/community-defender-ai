@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Live Transcription</title>
+</head>
+<body>
+    <h1>Live Transcription</h1>
+    <div id="transcription"></div>
+    <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+    <script>
+        const socket = io('http://127.0.0.1:8000');
+
+        socket.on('transcription_update', function(data) {
+            const transcriptionDiv = document.getElementById('transcription');
+            transcriptionDiv.innerHTML = '';
+            data.transcript.forEach(line => {
+                const p = document.createElement('p');
+                p.innerText = line;
+                transcriptionDiv.appendChild(p);
+            });
+        });
+
+        // Call the API to start transcription
+        fetch('http://127.0.0.1:8000/transcribe', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ url: 'http://stream.live.vc.bbcmedia.co.uk/bbc_world_service' })
+        });
+    </script>
+</body>
+</html>

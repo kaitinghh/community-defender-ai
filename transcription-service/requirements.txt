@@ -1,0 +1,5 @@
+deepgram-sdk
+flask
+flask_socketio
+python-dotenv
+os
