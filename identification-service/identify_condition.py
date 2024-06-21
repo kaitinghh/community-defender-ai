@@ -7,7 +7,10 @@ load_dotenv()
 co = cohere.Client(os.getenv("COHERE_API_KEY"))
 
 prompt = """You are given a transcript where you need to choose the first applicable condition from the list below. If a condition is not applicable, you should consider the next one in the list. Choose the first option that meets the criteria.
-Conditions: 1.cardiac arrest 2.severe bleeding 3.seizure 4.breathing problems 5.halted level of consciousness  6.non-critical."""
+Conditions: 1.cardiac arrest 2.severe bleeding 3.seizure 4.breathing problems 5.halted level of consciousness  6.non-critical.
+
+Given the output in this format: cardiac arrest
+"""
 
 def identify_condition(transcript):
     condition = co.chat(
@@ -15,7 +18,7 @@ def identify_condition(transcript):
         # perform web search before answering the question. You can also use your own custom connector.
         # connectors=[{"id": "web-search"}],
     )
-    return condition
+    return condition.text
 
 if __name__ == "__main__":
     transcript = """Operator: 995, what's your emergency?

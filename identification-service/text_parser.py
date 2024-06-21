@@ -7,7 +7,7 @@ def text_to_json(text):
 
     for line in lines:
         key, value = line.split(":", 1)
-        data[key.strip()] = value.strip()
+        data[key.strip().lower()] = value.strip()
     json_data = json.dumps(data, indent=4)
     
     return json_data

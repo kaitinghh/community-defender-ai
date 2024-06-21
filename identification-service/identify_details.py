@@ -18,9 +18,9 @@ The transcript given to you is:
 """
 
 def identify_details(transcript):
-    condition = co.chat(
+    details = co.chat(
         message=prompt + transcript,
         # perform web search before answering the question. You can also use your own custom connector.
         # connectors=[{"id": "web-search"}],
     )
-    return condition
+    return details.text
