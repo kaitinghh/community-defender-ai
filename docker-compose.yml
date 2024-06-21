@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: ./community-defender-fe
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    depends_on:
+      - transcription-service
+      - summarization-service
+      - identification-service
+
+  transcription-service:
+    build:
+      context: ./transcription-service
+      dockerfile: Dockerfile
+    ports:
+      - "5001:5001"
+    networks:
+      - app-network
+
+  summarization-service:
+    build:
+      context: ./summarization-service
+      dockerfile: Dockerfile
+    ports:
+      - "5002:5002"
+    networks:
+      - app-network
+
+  identification-service:
+    build:
+      context: ./identification-service
+      dockerfile: Dockerfile
+    ports:
+      - "5003:5003"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

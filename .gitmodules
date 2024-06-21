@@ -1,0 +1,3 @@
+[submodule "community-defender-fe"]
+	path = community-defender-fe
+	url = https://github.com/junnengsoo/community-defender-fe.git

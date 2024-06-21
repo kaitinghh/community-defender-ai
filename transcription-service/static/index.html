@@ -9,7 +9,7 @@
     <div id="transcription"></div>
     <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
     <script>
-        const socket = io('http://127.0.0.1:8000');
+        const socket = io('http://127.0.0.1:5001');
 
         socket.on('transcription_update', function(data) {
             const transcriptionDiv = document.getElementById('transcription');
@@ -22,7 +22,7 @@
         });
 
         // Call the API to start transcription
-        fetch('http://127.0.0.1:8000/transcribe', {
+        fetch('http://127.0.0.1:5001/transcribe', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
