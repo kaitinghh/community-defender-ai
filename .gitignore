@@ -1,2 +1,4 @@
 # .gitignore
 identification-service/.env
+summarization-service/.env
+transcription-service/.env

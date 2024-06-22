@@ -6,8 +6,41 @@ load_dotenv()
 
 co = cohere.Client(os.getenv("COHERE_API_KEY"))
 
-first_prompt = """You are given a transcript between an emergency call operator and the caller. 
-Extract only key phrases from the transcript, include important details such as symptoms, personal details, location. """
+first_prompt = """You are given a transcript of a conversation between an emergency call operator and a caller. 
+Your task is to extract key phrases that include important details such as location, personal details and symptoms. 
+Ensure that the extracted key phrases are concise and accurately reflect the critical information from the conversation.
+
+Requirements:
+Location: Specify the location details provided, such as address, landmarks, or surroundings.
+Personal Details: Include relevant personal information such as the caller's name, age, or relationship to the person in need.
+Symptoms: Describe any medical symptoms or conditions mentioned by the caller.
+
+Output Format:
+Location: Location details
+Personal Details: List of personal details
+Symptoms: List of key symptoms
+
+Example:
+Transcript:
+Operator: "911, what's your emergency?"
+Caller: "Hi, I need help! There's been a car accident on Maple Street."
+Operator: "Okay, I understand. Are you or anyone else injured?"
+Caller: "Yes, there's a woman who looks seriously hurt. She's not responding."
+Operator: "I'm dispatching emergency services to your location. Can you tell me if she's breathing?"
+Caller: "I'm not sure. I don't think she is."
+Operator: "Alright, can you check her pulse or see if her chest is moving?"
+Caller: "Hold on... No, I don't see any movement. What should I do?"
+Operator: "Stay calm. Help is on the way. Do you know CPR?"
+Caller: "Yes, but it's been a while since I learned."
+Operator: "That's okay. I can guide you through it. First, tilt her head back slightly to open her airway."
+
+Extracted Key Phrases:
+Location: car accident on Maple Street
+Personal Details: woman
+Symptoms: seriously hurt, not responding, not breathing, no pulse, no chest movement
+
+The transcript given to you is: 
+"""
 
 subsequent_prompt = """The call continues, with the transcript as follows. Extract only key phrases from the transcript, 
 include important details such as symptoms, personal details, location."""
