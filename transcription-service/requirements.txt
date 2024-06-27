@@ -1,4 +1,5 @@
 deepgram-sdk
 flask
 flask_socketio
+flask_cors
 python-dotenv
