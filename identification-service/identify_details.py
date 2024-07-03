@@ -8,7 +8,7 @@ co = cohere.Client(os.getenv("COHERE_API_KEY"))
 
 prompt = """You are given a transcript between an emergency call operator and the caller. 
 I need you to return the caller's name and address, if given in the transcript. If the caller's name and address are
-not given in the transcript, return "Unknown". 
+not given in the transcript, return "Unknown". If the caller's name and address are not in English, return them in English.
 
 Return in this format: 
 Name: Unknown

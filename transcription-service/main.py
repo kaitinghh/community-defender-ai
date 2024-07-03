@@ -22,7 +22,7 @@ config = DeepgramClientOptions(
 full_transcript = []
 TAG = 'SPEAKER '
 
-def transcribe(url, timeout, send_transcription):
+def transcribe(url, timeout, lang, send_transcription):
     try:
         deepgram = DeepgramClient(API_KEY, config)
         dg_connection = deepgram.listen.live.v("1")
@@ -66,15 +66,28 @@ def transcribe(url, timeout, send_transcription):
         dg_connection.on(LiveTranscriptionEvents.Transcript, on_message)
         dg_connection.on(LiveTranscriptionEvents.Metadata, on_metadata)
         dg_connection.on(LiveTranscriptionEvents.Error, on_error)
+        
+        print("lang", lang, type(lang))
+        print("_" + lang + "_")
 
-        options = LiveOptions(
+        if lang == "eng": 
+            print("yes")
+            options = LiveOptions(
             model="nova-2",
             language="en-US",
             diarize=True,
             smart_format=True,
         )
+        else: 
+            options = LiveOptions(
+            model="nova-2",
+            language="zh",
+            diarize=True,
+            smart_format=True,
+        )
 
         dg_connection.start(options)
+        print("started")
 
         lock_exit = threading.Lock()
         exit = False
@@ -117,15 +130,17 @@ def transcribe(url, timeout, send_transcription):
 @app.route('/transcribe', methods=['POST'])
 def transcribe_route():
     data = request.get_json()
+    print(data)
     url = data['url']
     caller_id = data['caller_id']  # Get the caller ID from the request
-    timeout = 70 # temporarily set
-    print(url)
+    lang = data['lang']
+    timeout = 80 # temporarily set
+    print(lang)
 
     def send_transcription(line):
         socketio.emit('transcription_update', {'caller_id': caller_id, 'line': line})
 
-    threading.Thread(target=transcribe, args=(url, timeout, send_transcription)).start()
+    threading.Thread(target=transcribe, args=(url, timeout, lang, send_transcription)).start()
     return jsonify({'status': 'Transcription started'})
 
 @app.route('/')

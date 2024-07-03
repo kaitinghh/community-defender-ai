@@ -9,6 +9,8 @@ co = cohere.Client(os.getenv("COHERE_API_KEY"))
 first_prompt = """You are given a transcript of a conversation between an emergency call operator and a caller. 
 Your task is to extract key phrases that include important details such as location, personal details and symptoms. 
 Ensure that the extracted key phrases are concise and accurately reflect the critical information from the conversation.
+If the transcript given is not in English, there is no need to provide an additional translation of the transcript, 
+just return the key phrases in English. 
 
 Requirements:
 Location: Specify the location details provided, such as address, landmarks, or surroundings.

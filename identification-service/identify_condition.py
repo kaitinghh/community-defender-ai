@@ -6,10 +6,10 @@ load_dotenv()
 
 co = cohere.Client(os.getenv("COHERE_API_KEY"))
 
-prompt = """You are given a transcript where you need to choose the first applicable condition from the list below. If a condition is not applicable, you should consider the next one in the list. Choose the first option that meets the criteria.
-Conditions: 1.cardiac arrest 2.severe bleeding 3.seizure 4.breathing problems 5.halted level of consciousness  6.non-critical.
+prompt = """You are given a transcript where you need to choose the most applicable condition from the list below. 
+Conditions: 1.breathing problems 2.cardiac arrest/death 3.chest pain 4.seizure 4.traumatic injury 5.unconscious/fainting  6.non-critical.
 
-Given the output in this format: cardiac arrest
+Give the output in this format: cardiac arrest
 """
 
 def identify_condition(transcript):
