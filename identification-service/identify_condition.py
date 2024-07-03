@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-co = cohere.Client(os.getenv("COHERE_API_KEY"))
+co = cohere.Client(os.getenv("COHERE_API_KEY_1"))
 
 prompt = """You are given a transcript where you need to choose the most applicable condition from the list below. 
 Conditions: 1.breathing problems 2.cardiac arrest/death 3.chest pain 4.seizure 4.traumatic injury 5.unconscious/fainting  6.non-critical.

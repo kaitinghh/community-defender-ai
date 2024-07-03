@@ -4,7 +4,8 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-co = cohere.Client(os.getenv("COHERE_API_KEY"))
+co1 = cohere.Client(os.getenv("COHERE_API_KEY_1"))
+co2 = cohere.Client(os.getenv("COHERE_API_KEY_2"))
 
 first_prompt = """You are given a transcript of a conversation between an emergency call operator and a caller. 
 Your task is to extract key phrases that include important details such as location, personal details and symptoms. 
@@ -18,8 +19,8 @@ Personal Details: Include relevant personal information such as the caller's nam
 Symptoms: Describe any medical symptoms or conditions mentioned by the caller.
 
 Output Format:
-Location: Location details
-Personal Details: List of personal details
+Location: Location details \n
+Personal Details: List of personal details \n
 Symptoms: List of key symptoms
 
 Example:
@@ -37,8 +38,8 @@ Caller: "Yes, but it's been a while since I learned."
 Operator: "That's okay. I can guide you through it. First, tilt her head back slightly to open her airway."
 
 Extracted Key Phrases:
-Location: car accident on Maple Street
-Personal Details: woman
+Location: car accident on Maple Street \n
+Personal Details: woman \n
 Symptoms: seriously hurt, not responding, not breathing, no pulse, no chest movement
 
 The transcript given to you is: 
@@ -47,14 +48,19 @@ The transcript given to you is:
 subsequent_prompt = """The call continues, with the transcript as follows. Extract only key phrases from the transcript, 
 include important details such as symptoms, personal details, location."""
 
-def first_summarize(transcript):
-    response = co.chat(
-        message=first_prompt + transcript,
-    )
+def first_summarize(transcript, api):
+    if api == 0:
+        response = co1.chat(
+            message=first_prompt + transcript,
+        )
+    else: 
+        response = co2.chat(
+            message=first_prompt + transcript,
+        )
     return response.text
 
 def subsequent_summarize(transcript):
-    response = co.chat(
+    response = co1.chat(
         message=subsequent_prompt + transcript,
     )
     return response.text

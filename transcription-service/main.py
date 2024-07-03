@@ -66,9 +66,6 @@ def transcribe(url, timeout, lang, send_transcription):
         dg_connection.on(LiveTranscriptionEvents.Transcript, on_message)
         dg_connection.on(LiveTranscriptionEvents.Metadata, on_metadata)
         dg_connection.on(LiveTranscriptionEvents.Error, on_error)
-        
-        print("lang", lang, type(lang))
-        print("_" + lang + "_")
 
         if lang == "eng": 
             print("yes")
