@@ -140,9 +140,9 @@ def transcribe_route():
     threading.Thread(target=transcribe, args=(url, timeout, lang, send_transcription)).start()
     return jsonify({'status': 'Transcription started'})
 
-@app.route('/')
-def serve_index():
-    return send_from_directory(app.static_folder, 'index.html')
+# @app.route('/')
+# def serve_index():
+#     return send_from_directory(app.static_folder, 'index.html')
 
 if __name__ == '__main__':
     socketio.run(app, host='0.0.0.0', port=5001, allow_unsafe_werkzeug=True)
