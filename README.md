@@ -1,8 +1,8 @@
 # community-defender-ai
 
-# Community Defender AI: Singapore Civil Defence Force - DELL Technologies Lifesavers' Innovation Challenge 2024 
-## - 1st Runners Up
-## - Most Innovative Use of Cloud Technologies Award
+### Community Defender AI: Singapore Civil Defence Force - DELL Technologies Lifesavers' Innovation Challenge 2024 
+### - 1st Runners Up
+### - Most Innovative Use of Cloud Technologies Award
 
 ### Team: Ho Kai Ting, Soo Jun Neng, Nicholas Lee
 
